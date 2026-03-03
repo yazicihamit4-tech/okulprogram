@@ -510,20 +510,30 @@
           <label>Çalışma Gün Sayısı</label>
           <input type="number" id="salWorkDays" placeholder="Örn: 20" style="padding:10px; font-size:13px;">
         </div>
+        <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
+          <label>Günlük Etkinlik Saati</label>
+          <input type="number" id="salDailyHours" placeholder="Örn: 4" value="4" style="padding:10px; font-size:13px;">
+        </div>
       </div>
-      <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-end;">
+      <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-end; margin-bottom: 12px;">
+        <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
+          <label>Aylık Toplam Ders Sayısı</label>
+          <input type="number" id="salTotalLessons" placeholder="Oto/Manuel: 80" style="padding:10px; font-size:13px;">
+        </div>
         <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
           <label>Saat Ücreti (TL)</label>
           <input type="number" id="salHourlyRate" value="64" style="padding:10px; font-size:13px;">
         </div>
         <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
-          <label>Günlük Etkinlik Saati</label>
-          <input type="number" id="salDailyHours" placeholder="Örn: 4" value="4" style="padding:10px; font-size:13px;">
+          <label>Grup (Sınıf) Sayısı</label>
+          <input type="number" id="salGroupCount" placeholder="Örn: 1" value="1" style="padding:10px; font-size:13px;">
         </div>
         <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
-          <label>Grup (Sınıf) Sayısı</label>
-          <input type="number" id="salGroupCount" placeholder="Örn: 5" value="1" style="padding:10px; font-size:13px;">
+          <label>Aylık Bir Çocuk Ücreti</label>
+          <input type="number" id="salMonthlyFee" placeholder="Oto Hesaplanan" style="padding:10px; font-size:13px; background-color:#f1f5f9;" readonly>
         </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-end;">
         <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
           <label>Devlet Memuru Aylığı</label>
           <input type="number" id="salCivilServant" value="13184.77" step="0.01" style="padding:10px; font-size:13px;">
@@ -1445,7 +1455,7 @@
     $("salDailyHours").value = 4; // Default
     $("salGroupCount").value = 1; // Default
 
-    autoCalculatePool(); // Compute total pool based on new logic
+    autoCalculatePool('hours_days'); // Compute total pool based on new logic
 
     renderSalaries();
     salaryModal.style.display = "flex";
@@ -1615,24 +1625,41 @@
 
   if($("btnCalcSalaries")) $("btnCalcSalaries").onclick = renderSalaries;
 
-  // Otomatik Toplam Havuz Hesaplama (Saat Ücreti * Günlük Saat * İş Günü Sayısı * Grup Sayısı)
-  function autoCalculatePool() {
+  // Otomatik Toplam Havuz Hesaplama (Saat Ücreti * Günlük Saat * İş Günü Sayısı * Grup Sayısı * Öğrenci)
+  function autoCalculatePool(source) {
     const hourlyRate = Number($("salHourlyRate")?.value) || 0;
     const dailyHours = Number($("salDailyHours")?.value) || 0;
     const workDays = Number($("salWorkDays")?.value) || 0;
     const groupCount = Number($("salGroupCount")?.value) || 0;
+    const studentCount = Number($("salStudentCount")?.value) || 0;
 
-    const pool = hourlyRate * dailyHours * workDays * groupCount;
+    // Eğer saat veya iş günü değiştiyse aylık ders saatini güncelle
+    if (source === 'hours_days') {
+      const totalLessons = dailyHours * workDays;
+      if ($("salTotalLessons")) $("salTotalLessons").value = totalLessons;
+    }
+
+    // Ders saati değişirse ya da hesaplandıysa
+    const totalLessons = Number($("salTotalLessons")?.value) || 0;
+
+    // Aylık Bir Çocuk Ücreti = Saat Ücreti * Aylık Toplam Ders Sayısı
+    const monthlyFee = hourlyRate * totalLessons;
+    if ($("salMonthlyFee")) $("salMonthlyFee").value = monthlyFee;
+
+    // Toplam Havuz = Aylık Ücret * Öğrenci Sayısı
+    const pool = monthlyFee * studentCount;
     if($("salTotalPool")) {
       $("salTotalPool").value = pool;
     }
   }
 
   // Event listenerları bağlayalım
-  if($("salHourlyRate")) $("salHourlyRate").addEventListener("input", autoCalculatePool);
-  if($("salDailyHours")) $("salDailyHours").addEventListener("input", autoCalculatePool);
-  if($("salWorkDays")) $("salWorkDays").addEventListener("input", autoCalculatePool);
-  if($("salGroupCount")) $("salGroupCount").addEventListener("input", autoCalculatePool);
+  if($("salHourlyRate")) $("salHourlyRate").addEventListener("input", () => autoCalculatePool('rate'));
+  if($("salDailyHours")) $("salDailyHours").addEventListener("input", () => autoCalculatePool('hours_days'));
+  if($("salWorkDays")) $("salWorkDays").addEventListener("input", () => autoCalculatePool('hours_days'));
+  if($("salTotalLessons")) $("salTotalLessons").addEventListener("input", () => autoCalculatePool('lessons'));
+  if($("salStudentCount")) $("salStudentCount").addEventListener("input", () => autoCalculatePool('students'));
+  if($("salGroupCount")) $("salGroupCount").addEventListener("input", () => autoCalculatePool('group'));
 
   // Özel yüzde göster/gizle
   if($("pRole")) {

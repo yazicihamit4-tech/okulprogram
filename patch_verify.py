@@ -1,5 +1,4 @@
 from playwright.sync_api import Page, expect, sync_playwright
-import os
 
 def test_salary_modal_open(page: Page):
     # Load the modified file directly
@@ -10,20 +9,22 @@ def test_salary_modal_open(page: Page):
     btn.click()
 
     # Change Inputs to User Scenario
-    # 1 Hour, 1 Group, 1 Work Day, 64 TL Rate
-    page.fill("#salDailyHours", "1")
-    page.fill("#salWorkDays", "1")
-    page.fill("#salGroupCount", "1")
+    # 64 TL Rate, 2 Hours, 15 Work Days, 85 Students, 1 Group
+    page.fill("#salDailyHours", "2")
+    page.fill("#salWorkDays", "15")
     page.fill("#salHourlyRate", "64")
+    page.fill("#salStudentCount", "85")
+    page.fill("#salGroupCount", "1")
+
+    # Wait to ensure inputs register
+    page.wait_for_timeout(500)
 
     # Click calculate
     calc_btn = page.locator("#btnCalcSalaries")
     calc_btn.click()
     page.wait_for_timeout(500)
 
-    # Scroll the container to see the inputs and table properly
-    page.evaluate("document.querySelector('#salaryModalOverlay .modal-box').scrollTo(0, 0)")
-    page.screenshot(path="/home/jules/verification/salary_modal_auto_pool.png")
+    page.screenshot(path="/home/jules/verification/salary_modal_new_formula.png")
 
 if __name__ == "__main__":
     with sync_playwright() as p:
@@ -32,6 +33,5 @@ if __name__ == "__main__":
         page.set_viewport_size({"width": 1280, "height": 720})
         try:
             test_salary_modal_open(page)
-            print("Successfully verified the calculations!")
         finally:
             browser.close()
