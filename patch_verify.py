@@ -24,7 +24,13 @@ def test_salary_modal_open(page: Page):
     calc_btn.click()
     page.wait_for_timeout(500)
 
-    page.screenshot(path="/home/jules/verification/salary_modal_new_formula.png")
+    rows = page.locator("#personnelTbody tr").all_inner_texts()
+    print("Personnel Table Values:")
+    for i, row in enumerate(rows):
+        print(f"[{i}]: {row.strip().replace(chr(9), ' | ')}")
+
+    page.evaluate("document.querySelector('#salaryModalOverlay .modal-box').scrollTo(0, 0)")
+    page.screenshot(path="/home/jules/verification/salary_modal_muafiyet.png")
 
 if __name__ == "__main__":
     with sync_playwright() as p:

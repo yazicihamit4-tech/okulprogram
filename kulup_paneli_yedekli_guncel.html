@@ -1541,7 +1541,13 @@
 
       const tax1 = gross * 0.15; // Gelir Vergisi %15
       const tax2 = gross * 0.00759; // Damga Vergisi binde 7.59
-      const net = gross - tax1 - tax2;
+
+      let exemption = 0;
+      if (p.role === "accounting") {
+        exemption = gross * 0.0935; // Muhasebe personeli için %9.35 Vergi Muafiyeti
+      }
+
+      const net = gross - tax1 - tax2 + exemption;
 
       totalGross += gross;
       totalTax1 += tax1;
@@ -1765,7 +1771,13 @@
 
         const tax1 = gross * 0.15;
         const tax2 = gross * 0.00759;
-        const net = gross - tax1 - tax2;
+
+        let exemption = 0;
+        if (p.role === "accounting") {
+          exemption = gross * 0.0935;
+        }
+
+        const net = gross - tax1 - tax2 + exemption;
 
         return {
           "Personel Adı": p.name,
@@ -1773,6 +1785,7 @@
           "Brüt Ücret": Number(gross.toFixed(2)),
           "Gelir Vergisi": Number(tax1.toFixed(2)),
           "Damga Vergisi": Number(tax2.toFixed(2)),
+          "Muafiyet (İade)": Number(exemption.toFixed(2)),
           "Net Ödenecek": Number(net.toFixed(2))
         };
       });
