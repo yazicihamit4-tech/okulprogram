@@ -1,0 +1,140 @@
+
+--- Sheet: 2025 Ocak Bütçe ---
+                  ÇOCUK KULÜPLERİ ÖRNEK BÜTÇE TABLOSU  ...                                        Unnamed: 12
+0                             ÜCRET BELİRLEME TABLOSU  ...                                                NaN
+1   A                         Aylık İçin Belirlene...  ...   K                      En Yüksek Devlet Memur...
+2                                             1.17021  ...                                          11116.995
+3                                                 NaN  ...                                                NaN
+4                        GİDER KALEMLERİ ÖZET TABLOSU  ...                                       Genel Toplam
+5                                     GİDER KALEMLERİ  ...                                       Genel Toplam
+6   Temel Giderler (Materyal Alımı, Beslenme, SGK ...  ...                                                242
+7                                                 NaN  ...                                                NaN
+8                                 Denetleme Yetkilisi  ...                                                NaN
+9                Kulüp Yönetim Kurulu Başkanı - Müdür  ...                                                NaN
+10      Kulüp Yönetim Kurulu Üyesi - Müdür Yardımcısı  ...                                                NaN
+11                                                NaN  ...                                                NaN
+12    Öğretmen, Usta Öğretici ve Koordinatör Öğretmen  ...                                                NaN
+13                                                NaN  ...                                                NaN
+14         Yazışma-Muhasebe İşlerini Yürüten Personel  ...                                                NaN
+
+[15 rows x 13 columns]
+
+--- Sheet: 2024 Ocak Bodro ---
+                Unnamed: 0        Unnamed: 1  ...          Unnamed: 23 Unnamed: 24
+0                      NaN               NaN  ...                  NaN         NaN
+1                      NaN               NaN  ...                  NaN         NaN
+2                  DAİRESİ               NaN  ...  2026-01-01 00:00:00         NaN
+3   İŞ YERİ SİGORTA SİCİL                NaN  ...                  NaN         NaN
+4                      NaN               NaN  ...                  NaN         NaN
+5                  SIRA NO  HİZMET ERBABININ  ...    NET MAAŞ\nTOPLAMI        İMZA
+6                      NaN               NaN  ...                  NaN         NaN
+7                      NaN            SINIFI  ...                  NaN         NaN
+8                      NaN               NaN  ...                  NaN         NaN
+9                      NaN               NaN  ...                  NaN         NaN
+10                       1               NaN  ...           6997.32896         NaN
+11                       2               NaN  ...          4998.094379         NaN
+12                       4               1/B  ...           4830.37894         NaN
+13                       5               2/B  ...           4830.37894         NaN
+14                       6               2/C  ...           4830.37894         NaN
+
+[15 rows x 25 columns]
+
+--- Sheet: 2026 Şubat Bütçe ---
+                  ÇOCUK KULÜPLERİ ÖRNEK BÜTÇE TABLOSU  ...                                        Unnamed: 12
+0                             ÜCRET BELİRLEME TABLOSU  ...                                                NaN
+1   A                         Aylık İçin Belirlene...  ...   K                      En Yüksek Devlet Memur...
+2                                            1.387871  ...                                         13184.7745
+3                                                 NaN  ...                                                NaN
+4                        GİDER KALEMLERİ ÖZET TABLOSU  ...                                       Genel Toplam
+5                                     GİDER KALEMLERİ  ...                                       Genel Toplam
+6   Temel Giderler (Materyal Alımı, Beslenme, SGK ...  ...                                                  1
+7                                                 NaN  ...                                                NaN
+8                                 Denetleme Yetkilisi  ...                                                NaN
+9                Kulüp Yönetim Kurulu Başkanı - Müdür  ...                                                NaN
+10      Kulüp Yönetim Kurulu Üyesi - Müdür Yardımcısı  ...                                                NaN
+11                                                NaN  ...                                                NaN
+12    Öğretmen, Usta Öğretici ve Koordinatör Öğretmen  ...                                                NaN
+13                                                NaN  ...                                                NaN
+14         Yazışma-Muhasebe İşlerini Yürüten Personel  ...                                                NaN
+
+[15 rows x 13 columns]
+
+--- Sheet: 2026 Şubat Bodro ---
+                Unnamed: 0        Unnamed: 1  ...          Unnamed: 23 Unnamed: 24
+0                      NaN               NaN  ...                  NaN         NaN
+1                      NaN               NaN  ...                  NaN         NaN
+2                  DAİRESİ               NaN  ...  2026-01-01 00:00:00         NaN
+3   İŞ YERİ SİGORTA SİCİL                NaN  ...                  NaN         NaN
+4                      NaN               NaN  ...                  NaN         NaN
+5                  SIRA NO  HİZMET ERBABININ  ...    NET MAAŞ\nTOPLAMI        İMZA
+6                      NaN               NaN  ...                  NaN         NaN
+7                      NaN            SINIFI  ...                  NaN         NaN
+8                      NaN               NaN  ...                  NaN         NaN
+9                      NaN               NaN  ...                  NaN         NaN
+10                       1               NaN  ...           6997.32896         NaN
+11                       2               NaN  ...          4998.094379         NaN
+12                       4               1/B  ...           4830.37894         NaN
+13                       5               2/B  ...           4830.37894         NaN
+14                       6               2/C  ...           4830.37894         NaN
+
+[15 rows x 25 columns]
+
+--- Sheet: 2024   ---
+                Unnamed: 0        Unnamed: 1  ...          Unnamed: 23 Unnamed: 24
+0                      NaN               NaN  ...                  NaN         NaN
+1                      NaN               NaN  ...                  NaN         NaN
+2                  DAİRESİ               NaN  ...  2026-01-01 00:00:00         NaN
+3   İŞ YERİ SİGORTA SİCİL                NaN  ...                  NaN         NaN
+4                      NaN               NaN  ...                  NaN         NaN
+5                  SIRA NO  HİZMET ERBABININ  ...    NET MAAŞ\nTOPLAMI        İMZA
+6                      NaN               NaN  ...                  NaN         NaN
+7                      NaN            SINIFI  ...                  NaN         NaN
+8                      NaN               NaN  ...                  NaN         NaN
+9                      NaN               NaN  ...                  NaN         NaN
+10                       1               NaN  ...                  NaN         NaN
+11                       2               NaN  ...                  NaN         NaN
+12                       4               1/B  ...                  NaN         NaN
+13                       5               2/B  ...                  NaN         NaN
+14                       6               2/C  ...                  NaN         NaN
+
+[15 rows x 25 columns]
+
+--- Sheet: faz ---
+                Unnamed: 0        Unnamed: 1  ...          Unnamed: 23 Unnamed: 24
+0                      NaN               NaN  ...                  NaN         NaN
+1                      NaN               NaN  ...                  NaN         NaN
+2                  DAİRESİ               NaN  ...  2026-01-01 00:00:00         NaN
+3   İŞ YERİ SİGORTA SİCİL                NaN  ...                  NaN         NaN
+4                      NaN               NaN  ...                  NaN         NaN
+5                  SIRA NO  HİZMET ERBABININ  ...      vergi kesintili        İMZA
+6                      NaN               NaN  ...                  NaN         NaN
+7                      NaN            SINIFI  ...                  NaN         NaN
+8                      NaN               NaN  ...                  NaN         NaN
+9                      NaN               NaN  ...                  NaN         NaN
+10                       1               NaN  ...                  NaN         NaN
+11                       2               NaN  ...                  NaN         NaN
+12                       4               1/B  ...                  NaN         NaN
+13                       5               2/B  ...                  NaN         NaN
+14                       6               2/C  ...                  NaN         NaN
+
+[15 rows x 25 columns]
+
+--- Sheet: Sayfa1 ---
+    Unnamed: 0  Unnamed: 1  Unnamed: 2  ...  Unnamed: 10  Unnamed: 11   Unnamed: 12
+0          NaN         NaN         NaN  ...          NaN          NaN           NaN
+1          NaN         NaN         NaN  ...          NaN          NaN           NaN
+2          NaN         NaN         NaN  ...          NaN          NaN           NaN
+3          NaN         NaN         NaN  ...          NaN          NaN           NaN
+4          NaN         NaN         NaN  ...         EKİM        KASIM        TOPLAM
+5          NaN         NaN         NaN  ...  4166.161076  2975.906445   7538.844668
+6          NaN         NaN         NaN  ...  2975.829637  2125.592894   5384.834778
+7          NaN         NaN         NaN  ...  2975.806802  2125.576287    5384.79326
+8          NaN         NaN         NaN  ...  2975.806802  2125.576287    5384.79326
+9          NaN         NaN         NaN  ...  2975.806802  2125.576287    5384.79326
+10         NaN         NaN         NaN  ...  2975.806802  2125.576287    5384.79326
+11         NaN         NaN         NaN  ...  2975.806802  2125.576287    5384.79326
+12         NaN         NaN         NaN  ...  1190.331439   850.236742   2153.933081
+13         NaN         NaN         NaN  ...          NaN          NaN  42001.578829
+14         NaN         NaN         NaN  ...          NaN          NaN           NaN
+
+[15 rows x 13 columns]
