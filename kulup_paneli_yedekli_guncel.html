@@ -492,29 +492,45 @@
     </div>
 
     <!-- Maaş Hesaplama Ayarları -->
-    <div style="background:#f8fafc; padding:16px; border-radius:12px; border:1px solid #e2e8f0; margin-bottom:16px; display:flex; flex-wrap:wrap; gap:16px; align-items:flex-end;">
-      <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
-        <label>Ay Seçimi</label>
-        <input type="month" id="salMonth" style="padding:10px; font-size:13px;">
+    <div style="background:#f8fafc; padding:16px; border-radius:12px; border:1px solid #e2e8f0; margin-bottom:16px; display:flex; flex-direction:column; gap:16px;">
+      <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-end;">
+        <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
+          <label>Ay Seçimi</label>
+          <input type="month" id="salMonth" style="padding:10px; font-size:13px;">
+        </div>
+        <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
+          <label>Öğrenci Sayısı</label>
+          <input type="number" id="salStudentCount" placeholder="Örn: 90" style="padding:10px; font-size:13px;">
+        </div>
+        <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
+          <label>Toplam Havuz (TL)</label>
+          <input type="number" id="salTotalPool" placeholder="Örn: 100000" style="padding:10px; font-size:13px;">
+        </div>
+        <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
+          <label>Çalışma Gün Sayısı</label>
+          <input type="number" id="salWorkDays" placeholder="Örn: 20" style="padding:10px; font-size:13px;">
+        </div>
       </div>
-      <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
-        <label>Öğrenci Sayısı</label>
-        <input type="number" id="salStudentCount" placeholder="Örn: 90" style="padding:10px; font-size:13px;">
-      </div>
-      <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
-        <label>Toplam Havuz (TL)</label>
-        <input type="number" id="salTotalPool" placeholder="Örn: 100000" style="padding:10px; font-size:13px;">
-      </div>
-      <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
-        <label>Çalışma Gün Sayısı</label>
-        <input type="number" id="salWorkDays" placeholder="Örn: 20" style="padding:10px; font-size:13px;">
-      </div>
-      <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
-        <label>Saat Ücreti (TL)</label>
-        <input type="number" id="salHourlyRate" value="64" style="padding:10px; font-size:13px;">
-      </div>
-      <div style="flex:1; min-width:140px;">
-        <button class="big-btn" id="btnCalcSalaries" style="padding:10px 14px; margin:0; font-size:13px; width:100%;">Hesapla</button>
+      <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-end;">
+        <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
+          <label>Saat Ücreti (TL)</label>
+          <input type="number" id="salHourlyRate" value="64" style="padding:10px; font-size:13px;">
+        </div>
+        <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
+          <label>Günlük Etkinlik Saati</label>
+          <input type="number" id="salDailyHours" placeholder="Örn: 4" value="4" style="padding:10px; font-size:13px;">
+        </div>
+        <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
+          <label>Grup (Sınıf) Sayısı</label>
+          <input type="number" id="salGroupCount" placeholder="Örn: 5" value="1" style="padding:10px; font-size:13px;">
+        </div>
+        <div class="form-group" style="margin-bottom:0; flex:1; min-width:140px;">
+          <label>Devlet Memuru Aylığı</label>
+          <input type="number" id="salCivilServant" value="13184.77" step="0.01" style="padding:10px; font-size:13px;">
+        </div>
+        <div style="flex:1; min-width:140px;">
+          <button class="big-btn" id="btnCalcSalaries" style="padding:10px 14px; margin:0; font-size:13px; width:100%;">Hesapla</button>
+        </div>
       </div>
     </div>
 
@@ -1450,6 +1466,27 @@
     tfoot.innerHTML = "";
 
     const totalPool = Number($("salTotalPool").value) || 0;
+    const civilServantAylik = Number($("salCivilServant").value) || 13184.77;
+    const hourlyRate = Number($("salHourlyRate").value) || 64;
+    const dailyHours = Number($("salDailyHours").value) || 4;
+    const workDays = Number($("salWorkDays").value) || 20;
+    const groupCount = Number($("salGroupCount").value) || 1;
+
+    // Aylik Ucret Formul = Saat Ucreti * Gunluk Saat * Aylik is Gunu Sayisi
+    const aylikUcret = hourlyRate * dailyHours * workDays;
+
+    // Brüt Tavan Hesaplamaları (Devlet Memuru Aylığı * Çarpan)
+    const tavanManager = civilServantAylik * 2.75; // Müdür - Koordinatör Öğretmen
+    const tavanDeputy = civilServantAylik * 2.50;  // Müdür Yardımcısı
+    const tavanTeacher = civilServantAylik * 4.00; // Kadrolu Öğretmen
+    const tavanUsta = civilServantAylik * 4.00;    // Usta Öğretici
+    const tavanAccounting = civilServantAylik * 2.00; // Muhasebe
+    const tavanCleaning = civilServantAylik * 2.00; // Temizlik
+
+    // Öğretmen havuzundakileri sayalım
+    const teacherPoolCount = state.personnel.filter(p => p.role === "teacher_pool").length;
+    const teacherPoolTotal = totalPool * 0.55;
+    const teacherPerPerson = teacherPoolCount > 0 ? (teacherPoolTotal / teacherPoolCount) : 0;
 
     // Hesaplamalar
     let totalGross = 0;
@@ -1457,19 +1494,39 @@
     let totalTax2 = 0;
     let totalNet = 0;
 
-    // Öğretmen havuzundakileri sayalım
-    const teacherPoolCount = state.personnel.filter(p => p.role === "teacher_pool").length;
-    const teacherPoolTotal = totalPool * 0.55;
-    const teacherPerPerson = teacherPoolCount > 0 ? (teacherPoolTotal / teacherPoolCount) : 0;
-
     state.personnel.forEach(p => {
       let gross = 0;
-      if(p.role === "manager") gross = totalPool * 0.07;
-      else if(p.role === "deputy") gross = totalPool * 0.05;
-      else if(p.role === "accounting") gross = totalPool * 0.02;
-      else if(p.role === "cleaning") gross = totalPool * 0.04;
-      else if(p.role === "teacher_pool") gross = teacherPerPerson;
-      else if(p.role === "custom") gross = totalPool * (Number(p.percent) / 100);
+      let maxGross = Infinity;
+
+      if(p.role === "manager") {
+        gross = totalPool * 0.07;
+        maxGross = tavanManager;
+      }
+      else if(p.role === "deputy") {
+        gross = totalPool * 0.05;
+        maxGross = tavanDeputy;
+      }
+      else if(p.role === "accounting") {
+        gross = totalPool * 0.02;
+        maxGross = tavanAccounting;
+      }
+      else if(p.role === "cleaning") {
+        gross = totalPool * 0.04;
+        maxGross = tavanCleaning;
+      }
+      else if(p.role === "teacher_pool") {
+        gross = teacherPerPerson;
+        let isCoordinator = p.name.toLowerCase().includes("koordinatör");
+        maxGross = isCoordinator ? tavanManager : tavanTeacher;
+      }
+      else if(p.role === "custom") {
+        gross = totalPool * (Number(p.percent) / 100);
+      }
+
+      // Tavan sınırını uygula
+      if (gross > maxGross) {
+        gross = maxGross;
+      }
 
       const tax1 = gross * 0.15; // Gelir Vergisi %15
       const tax2 = gross * 0.00759; // Damga Vergisi binde 7.59
@@ -1496,20 +1553,63 @@
       tbody.appendChild(tr);
     });
 
+    // Ekstra Kesintiler/Giderler: Temel Giderler (%26) ve Denetleme Yetkilisi (%1)
+    const basicExpenses = totalPool * 0.26;
+    const auditorExpense = totalPool * 0.01;
+
+    // Temel Giderler Satırı
+    const expensesTr = document.createElement("tr");
+    expensesTr.style.background = "#f1f5f9";
+    expensesTr.innerHTML = `
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; font-weight:bold; color:#475569;">Temel Giderler (Materyal vb.)</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; color:#475569;">%26 Havuzdan</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; text-align:right;">${formatTL(basicExpenses)}</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; text-align:right; color:#94a3b8;">-</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; text-align:right; color:#94a3b8;">-</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; text-align:right; color:#10b981; font-weight:bold;">${formatTL(basicExpenses)}</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; text-align:center;">
+        <span style="font-size:11px; color:#64748b;">Sabit Gider</span>
+      </td>
+    `;
+    tbody.appendChild(expensesTr);
+
+    // Denetleme Yetkilisi Satırı
+    const auditorTr = document.createElement("tr");
+    auditorTr.style.background = "#f1f5f9";
+    auditorTr.innerHTML = `
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; font-weight:bold; color:#475569;">Denetleme Yetkilisi</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; color:#475569;">%1 Havuzdan</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; text-align:right;">${formatTL(auditorExpense)}</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; text-align:right; color:#94a3b8;">-</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; text-align:right; color:#94a3b8;">-</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; text-align:right; color:#10b981; font-weight:bold;">${formatTL(auditorExpense)}</td>
+      <td style="padding:10px; border-bottom:1px solid #cbd5e1; text-align:center;">
+        <span style="font-size:11px; color:#64748b;">Sabit Gider</span>
+      </td>
+    `;
+    tbody.appendChild(auditorTr);
+
+    // Update totals
+    totalGross += basicExpenses + auditorExpense;
+    totalNet += basicExpenses + auditorExpense;
+
     if(state.personnel.length === 0){
-      tbody.innerHTML = `<tr><td colspan="7" style="padding:14px; text-align:center; color:#64748b;">Kayıtlı personel bulunamadı.</td></tr>`;
-    } else {
-      tfoot.innerHTML = `
-        <tr>
-          <td colspan="2" style="padding:10px; text-align:right;">GENEL TOPLAM:</td>
-          <td style="padding:10px; text-align:right;">${formatTL(totalGross)}</td>
-          <td style="padding:10px; text-align:right; color:#ef4444;">-${formatTL(totalTax1)}</td>
-          <td style="padding:10px; text-align:right; color:#ef4444;">-${formatTL(totalTax2)}</td>
-          <td style="padding:10px; text-align:right; color:#10b981;">${formatTL(totalNet)}</td>
-          <td></td>
-        </tr>
-      `;
+      // Prepend a "no personnel" row if none exist, but keep expenses at bottom
+      const noPers = document.createElement("tr");
+      noPers.innerHTML = `<td colspan="7" style="padding:14px; text-align:center; color:#64748b;">Kayıtlı personel bulunamadı. Sadece sabit giderler gösteriliyor.</td>`;
+      tbody.insertBefore(noPers, tbody.firstChild);
     }
+
+    tfoot.innerHTML = `
+      <tr>
+        <td colspan="2" style="padding:10px; text-align:right;">GENEL TOPLAM:</td>
+        <td style="padding:10px; text-align:right;">${formatTL(totalGross)}</td>
+        <td style="padding:10px; text-align:right; color:#ef4444;">-${formatTL(totalTax1)}</td>
+        <td style="padding:10px; text-align:right; color:#ef4444;">-${formatTL(totalTax2)}</td>
+        <td style="padding:10px; text-align:right; color:#10b981;">${formatTL(totalNet)}</td>
+        <td></td>
+      </tr>
+    `;
   }
 
   if($("btnCalcSalaries")) $("btnCalcSalaries").onclick = renderSalaries;
@@ -1589,6 +1689,7 @@
   if($("btnExportSalariesExcel")) {
     $("btnExportSalariesExcel").onclick = () => {
       const totalPool = Number($("salTotalPool").value) || 0;
+      const baseSalary = Number($("salCivilServant").value) || 13184.77;
       const month = $("salMonth").value || "Bilinmeyen Ay";
 
       const teacherPoolCount = state.personnel.filter(p => p.role === "teacher_pool").length;
@@ -1597,12 +1698,23 @@
 
       const rows = state.personnel.map(p => {
         let gross = 0;
+        let isCoordinator = p.role === "teacher_pool" && p.name.toLowerCase().includes("koordinatör");
+
         if(p.role === "manager") gross = totalPool * 0.07;
         else if(p.role === "deputy") gross = totalPool * 0.05;
         else if(p.role === "accounting") gross = totalPool * 0.02;
         else if(p.role === "cleaning") gross = totalPool * 0.04;
         else if(p.role === "teacher_pool") gross = teacherPerPerson;
         else if(p.role === "custom") gross = totalPool * (Number(p.percent) / 100);
+
+        let multiplier = 2.0; // default for unknown/accounting/cleaning/custom
+        if(p.role === "manager") multiplier = 2.75;
+        else if(p.role === "deputy") multiplier = 2.5;
+        else if(p.role === "teacher_pool") multiplier = isCoordinator ? 2.75 : 4.0;
+        else if(p.role === "accounting" || p.role === "cleaning") multiplier = 2.0;
+
+        let maxGross = baseSalary * multiplier;
+        if(gross > maxGross) gross = maxGross;
 
         const tax1 = gross * 0.15;
         const tax2 = gross * 0.00759;
